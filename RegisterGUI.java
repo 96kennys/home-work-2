@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +10,13 @@
  */
 public class registerGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form registerGUI
-     */
+    private int type = 0;
+    private RegisterMODEL model;
+    private Object obj;
+    
     public registerGUI() {
         initComponents();
+        model = new RegisterMODEL();
     }
 
     /**
@@ -29,12 +32,12 @@ public class registerGUI extends javax.swing.JFrame {
         pnlRegister = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        lblTitel = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         lblAuthor = new javax.swing.JLabel();
         lblRating = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        txfTitel = new javax.swing.JTextField();
+        txaTextscreen = new javax.swing.JTextArea();
+        txfTitle = new javax.swing.JTextField();
         txfAuthor = new javax.swing.JTextField();
         txfRating = new javax.swing.JTextField();
         btnReadFile = new javax.swing.JButton();
@@ -59,15 +62,15 @@ public class registerGUI extends javax.swing.JFrame {
 
         pnlRegister.addTab("tab2", jPanel5);
 
-        lblTitel.setText("Titel:");
+        lblTitle.setText("Titel:");
 
         lblAuthor.setText("Author:");
 
         lblRating.setText("Rating:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txaTextscreen.setColumns(20);
+        txaTextscreen.setRows(5);
+        jScrollPane2.setViewportView(txaTextscreen);
 
         txfRating.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +79,11 @@ public class registerGUI extends javax.swing.JFrame {
         });
 
         btnReadFile.setText("Read File");
+        btnReadFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadFileActionPerformed(evt);
+            }
+        });
 
         btnChooseFile.setText("Choose File");
         btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +93,11 @@ public class registerGUI extends javax.swing.JFrame {
         });
 
         btnAdd.setText("Add to file");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdbGame);
         rdbGame.setText("Game");
@@ -117,38 +130,40 @@ public class registerGUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblTitel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblAuthor, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblRating))
-                            .addGap(27, 27, 27)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txfRating, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(39, 39, 39)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(rdbMovie)
-                                .addComponent(rdbAlbum)
-                                .addComponent(rdbGame, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnChooseFile)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnReadFile)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnChooseFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReadFile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAuthor, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRating))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfRating, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdbAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rdbMovie, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rdbGame, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(47, 47, 47))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitel)
-                    .addComponent(txfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitle)
+                    .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdbMovie))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,7 +191,7 @@ public class registerGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+            .addComponent(pnlRegister)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,20 +206,31 @@ public class registerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txfRatingActionPerformed
 
     private void rdbMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMovieActionPerformed
-        // TODO add your handling code here:
+        type = 1;
     }//GEN-LAST:event_rdbMovieActionPerformed
-
+    
     private void rdbAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAlbumActionPerformed
-        // TODO add your handling code here:
+        type = 2;
     }//GEN-LAST:event_rdbAlbumActionPerformed
 
     private void rdbGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbGameActionPerformed
-        // TODO add your handling code here:
+        type = 3;
     }//GEN-LAST:event_rdbGameActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
-        // TODO add your handling code here:
+        model.chooseFile();
     }//GEN-LAST:event_btnChooseFileActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        model.addObject(txfTitle.getText(), txfAuthor.getText(), Integer.parseInt(txfRating.getText()), type);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadFileActionPerformed
+        
+        for(Object obj : model.readObjects()){
+            txaTextscreen.append("Title: " + obj.getTitle());
+        }
+    }//GEN-LAST:event_btnReadFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,16 +275,16 @@ public class registerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblRating;
-    private javax.swing.JLabel lblTitel;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTabbedPane pnlRegister;
     private javax.swing.JRadioButton rdbAlbum;
     private javax.swing.JRadioButton rdbGame;
     private javax.swing.JRadioButton rdbMovie;
+    private javax.swing.JTextArea txaTextscreen;
     private javax.swing.JTextField txfAuthor;
     private javax.swing.JTextField txfRating;
-    private javax.swing.JTextField txfTitel;
+    private javax.swing.JTextField txfTitle;
     // End of variables declaration//GEN-END:variables
 }
