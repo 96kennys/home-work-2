@@ -12,7 +12,7 @@ public class registerGUI extends javax.swing.JFrame {
 
     private int type = 0;
     private RegisterMODEL model;
-    private Object obj;
+    private MyObject obj;
     
     public registerGUI() {
         initComponents();
@@ -227,7 +227,7 @@ public class registerGUI extends javax.swing.JFrame {
 
     private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadFileActionPerformed
         
-        for(Object obj : model.readObjects()){
+        for(MyObject obj : model.readObjects()){
             txaTextscreen.append("Title: " + obj.getTitle());
         }
     }//GEN-LAST:event_btnReadFileActionPerformed

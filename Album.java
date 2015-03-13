@@ -1,7 +1,7 @@
 
-public class Game extends MyObject{
+public class Album extends MyObject{
     
-    public Game(String title, String author, int rating, int type){
+    public Album(String title, String author, int rating, int type){
         this.title = title;
         this.author = author;
         this.rating = rating;
