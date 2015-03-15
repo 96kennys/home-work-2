@@ -1,7 +1,7 @@
 
 public class Album extends MyObject{
     
-    public Album(String title, String author, int rating, int type){
+    public Album(String title, String author, String rating, String type){
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -18,12 +18,12 @@ public class Album extends MyObject{
     }
 
     @Override
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
     @Override
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }  
 }

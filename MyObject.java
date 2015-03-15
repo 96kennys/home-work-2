@@ -1,11 +1,9 @@
-import java.util.ArrayList;  
-
-public abstract class MyObject{
+public abstract class MyObject implements Comparable{
         
     protected String title;
     protected String author;
-    protected int rating;
-    protected int type;
+    protected String rating;
+    protected String type;
 
     /**
      *
@@ -17,9 +15,9 @@ public abstract class MyObject{
     
     public abstract void setAuthor(String author);
     
-    public abstract void setRating(int rating);
+    public abstract void setRating(String rating);
     
-    public abstract void setType(int type);
+    public abstract void setType(String type);
     
     public String getTitle(){
         return title;
@@ -29,15 +27,20 @@ public abstract class MyObject{
         return author;
     }
     
-    public int getRating(){
+    public String getRating(){
         return rating;
     }
     
-    public int getType(){
+    public String getType(){
         return type;
     }
     @Override
     public String toString(){
         return title + ";" + author + ";" + rating + ";" + type;
+    } 
+    @Override
+    public int compareTo(Object o) {
+        MyObject c = (MyObject) o;
+        return this.author.compareTo(c.getAuthor());
     }
 }

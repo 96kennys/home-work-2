@@ -8,13 +8,13 @@
  *
  * @author 96kennys
  */
-public class registerGUI extends javax.swing.JFrame {
+public class RegisterGUI extends javax.swing.JFrame {
 
-    private int type = 0;
+    private String type = "";
     private RegisterMODEL model;
     private MyObject obj;
     
-    public registerGUI() {
+    public RegisterGUI() {
         initComponents();
         model = new RegisterMODEL();
     }
@@ -206,15 +206,15 @@ public class registerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txfRatingActionPerformed
 
     private void rdbMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMovieActionPerformed
-        type = 1;
+        type = "Movie";
     }//GEN-LAST:event_rdbMovieActionPerformed
     
     private void rdbAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAlbumActionPerformed
-        type = 2;
+        type = "Album";
     }//GEN-LAST:event_rdbAlbumActionPerformed
 
     private void rdbGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbGameActionPerformed
-        type = 3;
+        type = "Game";
     }//GEN-LAST:event_rdbGameActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
@@ -222,13 +222,14 @@ public class registerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        model.addObject(txfTitle.getText(), txfAuthor.getText(), Integer.parseInt(txfRating.getText()), type);
+        model.addObject(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadFileActionPerformed
-        
         for(MyObject obj : model.readObjects()){
-            txaTextscreen.append("Title: " + obj.getTitle());
+            txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " + 
+            obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
+            obj.getType() + "\n\n");
         }
     }//GEN-LAST:event_btnReadFileActionPerformed
 
@@ -249,20 +250,20 @@ public class registerGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registerGUI().setVisible(true);
+                new RegisterGUI().setVisible(true);
             }
         });
     }

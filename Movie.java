@@ -1,7 +1,7 @@
 
-public class Movie extends MyObject implements java.lang.Comparable<Movie>{
+public class Movie extends MyObject{
     
-    public Movie(String title, String author, int rating, int type){
+    public Movie(String title, String author, String rating, String type){
         this.title = title;
         this.author = author;
         this.rating = rating;
@@ -18,17 +18,12 @@ public class Movie extends MyObject implements java.lang.Comparable<Movie>{
     }
 
     @Override
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
     @Override
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
-    }  
-
-    @Override
-    public int compareTo(Movie o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    } 
 }
