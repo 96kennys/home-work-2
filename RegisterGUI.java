@@ -8,13 +8,14 @@
  *
  * @author 96kennys
  */
-public class registerGUI extends javax.swing.JFrame {
+public class RegisterGUI extends javax.swing.JFrame {
 
     private String type = "";
+    private String sortBy = null;
     private RegisterMODEL model;
     private MyObject obj;
     
-    public registerGUI() {
+    public RegisterGUI() {
         initComponents();
         model = new RegisterMODEL();
     }
@@ -29,6 +30,8 @@ public class registerGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         pnlRegister = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -42,10 +45,20 @@ public class registerGUI extends javax.swing.JFrame {
         txfRating = new javax.swing.JTextField();
         btnReadFile = new javax.swing.JButton();
         btnChooseFile = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
+        btnAddCsv = new javax.swing.JButton();
         rdbGame = new javax.swing.JRadioButton();
         rdbAlbum = new javax.swing.JRadioButton();
         rdbMovie = new javax.swing.JRadioButton();
+        lblSortBy = new javax.swing.JLabel();
+        rdbSortByTitel = new javax.swing.JRadioButton();
+        rdbSortByAuthor = new javax.swing.JRadioButton();
+        rdbSortByRating = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnAddXml = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        cbSelect = new javax.swing.JComboBox();
+        btnRemove = new javax.swing.JButton();
+        lblDelete = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +66,7 @@ public class registerGUI extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
+            .addGap(0, 753, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,12 +85,6 @@ public class registerGUI extends javax.swing.JFrame {
         txaTextscreen.setRows(5);
         jScrollPane2.setViewportView(txaTextscreen);
 
-        txfRating.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfRatingActionPerformed(evt);
-            }
-        });
-
         btnReadFile.setText("Read File");
         btnReadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +99,10 @@ public class registerGUI extends javax.swing.JFrame {
             }
         });
 
-        btnAdd.setText("Add to file");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCsv.setText("Add to CSV");
+        btnAddCsv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnAddCsvActionPerformed(evt);
             }
         });
 
@@ -123,6 +130,48 @@ public class registerGUI extends javax.swing.JFrame {
             }
         });
 
+        lblSortBy.setText("Sort by:");
+
+        buttonGroup2.add(rdbSortByTitel);
+        rdbSortByTitel.setText("Titel");
+        rdbSortByTitel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbSortByTitelActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(rdbSortByAuthor);
+        rdbSortByAuthor.setText("Author");
+        rdbSortByAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbSortByAuthorActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(rdbSortByRating);
+        rdbSortByRating.setText("Rating");
+        rdbSortByRating.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbSortByRatingActionPerformed(evt);
+            }
+        });
+
+        btnAddXml.setText("Add to XML");
+        btnAddXml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddXmlActionPerformed(evt);
+            }
+        });
+
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+
+        lblDelete.setText("Delte an item from the library:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -132,30 +181,55 @@ public class registerGUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnChooseFile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReadFile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(lblSortBy)
+                            .addComponent(rdbSortByTitel)
+                            .addComponent(rdbSortByAuthor))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAuthor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRating))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfRating, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rdbAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rdbMovie, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rdbGame, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(47, 47, 47))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblDelete)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(rdbSortByRating)
+                                .addGap(134, 134, 134)
+                                .addComponent(btnReadFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblAuthor, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblRating))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txfRating, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(btnAddXml)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnChooseFile)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnAddCsv))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rdbMovie)
+                                            .addComponent(rdbAlbum)
+                                            .addComponent(rdbGame))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(123, 123, 123)
+                                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,25 +239,46 @@ public class registerGUI extends javax.swing.JFrame {
                     .addComponent(lblTitle)
                     .addComponent(txfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdbMovie))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAuthor)
                     .addComponent(txfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdbAlbum))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRating)
                     .addComponent(txfRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdbGame))
-                .addGap(25, 25, 25)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChooseFile)
-                    .addComponent(btnAdd)
-                    .addComponent(btnReadFile))
+                    .addComponent(btnAddCsv)
+                    .addComponent(btnAddXml)
+                    .addComponent(btnChooseFile))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSortBy)
+                .addGap(7, 7, 7)
+                .addComponent(rdbSortByTitel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(rdbSortByAuthor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbSortByRating)
+                    .addComponent(btnReadFile))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemove))
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
+
+        rdbSortByTitel.getAccessibleContext().setAccessibleDescription("");
 
         pnlRegister.addTab("Register", jPanel2);
 
@@ -191,7 +286,9 @@ public class registerGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlRegister)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,14 +298,22 @@ public class registerGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfRatingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfRatingActionPerformed
+    private void rdbSortByRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSortByRatingActionPerformed
+        sortBy = "rating";
+    }//GEN-LAST:event_rdbSortByRatingActionPerformed
+
+    private void rdbSortByAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSortByAuthorActionPerformed
+        sortBy = "author";
+    }//GEN-LAST:event_rdbSortByAuthorActionPerformed
+
+    private void rdbSortByTitelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSortByTitelActionPerformed
+        sortBy = "title";
+    }//GEN-LAST:event_rdbSortByTitelActionPerformed
 
     private void rdbMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMovieActionPerformed
         type = "Movie";
     }//GEN-LAST:event_rdbMovieActionPerformed
-    
+
     private void rdbAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAlbumActionPerformed
         type = "Album";
     }//GEN-LAST:event_rdbAlbumActionPerformed
@@ -217,22 +322,36 @@ public class registerGUI extends javax.swing.JFrame {
         type = "Game";
     }//GEN-LAST:event_rdbGameActionPerformed
 
+    private void btnAddCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCsvActionPerformed
+        model.addObject(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
+        txfTitle.setText("");
+        txfAuthor.setText("");
+        txfRating.setText("");
+    }//GEN-LAST:event_btnAddCsvActionPerformed
+
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
         model.chooseFile();
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        model.addObject(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadFileActionPerformed
-        for(MyObject obj : model.readObjects()){
-            txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " + 
-            obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
-            obj.getType() + "\n\n");
+        txaTextscreen.append("");
+        for(MyObject obj : model.readObjects(sortBy)){
+            cbSelect.addItem(obj.getTitle());
+            txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
+                obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
+                obj.getType() + "\n\n");
         }
     }//GEN-LAST:event_btnReadFileActionPerformed
 
+    private void btnAddXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddXmlActionPerformed
+        model.writeXML(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
+    }//GEN-LAST:event_btnAddXmlActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        model.removeObject((String) cbSelect.getSelectedItem());
+        cbSelect.removeItem(cbSelect.getSelectedItem());
+    }//GEN-LAST:event_btnRemoveActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -250,39 +369,51 @@ public class registerGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registerGUI().setVisible(true);
+                new RegisterGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddCsv;
+    private javax.swing.JButton btnAddXml;
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnReadFile;
+    private javax.swing.JButton btnRemove;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox cbSelect;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblDelete;
     private javax.swing.JLabel lblRating;
+    private javax.swing.JLabel lblSortBy;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTabbedPane pnlRegister;
     private javax.swing.JRadioButton rdbAlbum;
     private javax.swing.JRadioButton rdbGame;
     private javax.swing.JRadioButton rdbMovie;
+    private javax.swing.JRadioButton rdbSortByAuthor;
+    private javax.swing.JRadioButton rdbSortByRating;
+    private javax.swing.JRadioButton rdbSortByTitel;
     private javax.swing.JTextArea txaTextscreen;
     private javax.swing.JTextField txfAuthor;
     private javax.swing.JTextField txfRating;

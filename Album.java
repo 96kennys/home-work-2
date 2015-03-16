@@ -39,7 +39,17 @@ public class Album extends MyObject{
         
         if(this.sortBy == null){
             return this.sortString().compareTo(c.sortString());
-        }else{
+        }
+        else if(this.sortBy.equals("title")){
+            return this.title.compareTo(c.getTitle());
+        }
+        else if(this.sortBy.equals("author")){
+            return this.author.compareTo(c.getAuthor());
+        }
+        else if(this.sortBy.equals("rating")){
+            return this.rating.compareTo(c.getRating());
+        }
+        else{
            return this.title.compareTo(c.getAuthor());
         }
     }
