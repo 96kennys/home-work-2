@@ -121,11 +121,12 @@ public class RegisterMODEL{
                     storeObject.add(obj);
                 }
                 line = rFile.readLine();
+            }
+            
                 
         System.out.println(storeObject);
         Collections.sort(storeObject);
         System.out.println(storeObject);
-            }
         }catch(IOException e){
             System.out.println("An issue has occured.");
         }

@@ -39,8 +39,5 @@ public abstract class MyObject implements Comparable{
         return title + ";" + author + ";" + rating + ";" + type;
     } 
     @Override
-    public int compareTo(Object o) {
-        MyObject c = (MyObject) o;
-        return this.author.compareTo(c.getAuthor());
-    }
+    public abstract int compareTo(Object o);
 }

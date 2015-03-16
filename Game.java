@@ -26,4 +26,11 @@ public class Game extends MyObject{
     public void setType(String type) {
         this.type = type;
     }  
+ 
+    
+    @Override
+    public int compareTo(Object o) {
+        MyObject c = (MyObject) o;
+        return this.type.compareTo(c.getType() + c.getAuthor() + c.getRating() + c.getTitle());
+    }
 }
