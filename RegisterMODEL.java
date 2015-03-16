@@ -23,13 +23,13 @@ public class RegisterMODEL{
         MyObject tmp;
         
         if(type.equals("Game")){
-            tmp = new Game(title, author, rating, type);
+            tmp = new Game(title, author, rating, type, "sorted");
         }
         else if(type.equals("Movie")){
-            tmp = new Movie(title, author, rating, type);
+            tmp = new Movie(title, author, rating, type, "sorted");
         } 
         else{
-            tmp = new Album(title, author, rating, type);
+            tmp = new Album(title, author, rating, type, "sorted");
         }
         
         storeObject.add(tmp);
@@ -52,14 +52,14 @@ public class RegisterMODEL{
                 for(int i = 0; i < post.length; i++){
                     System.out.println(post[3]);
                     if(post[3].equals("Movie")){
-                        obj = new Movie(post[0], post[1], post[2], post[3]); 
+                        obj = new Movie(post[0], post[1], post[2], post[3], "sorted"); 
                         System.out.println("Den jlrs");
                     }
                     else if(post[3].equals("Album")){
-                        obj = new Album(post[0],post[1], post[2], post[3]);                
+                        obj = new Album(post[0],post[1], post[2], post[3], "sorted");                
                     }
                     else{
-                        obj = new Game(post[0],post[1], post[2], post[3]);                
+                        obj = new Game(post[0],post[1], post[2], post[3], "sorted");                
                     }
                 }
                 if(obj != null){
@@ -108,13 +108,13 @@ public class RegisterMODEL{
                 for(int i = 0; i < post.length; i++){
                     System.out.println(post[3]);
                     if(post[3].equals("Movie")){
-                        obj = new Movie(post[0], post[1], post[2], post[3]); 
+                        obj = new Movie(post[0], post[1], post[2], post[3], null); 
                     }
                     else if(post[3].equals("Album")){
-                        obj = new Album(post[0],post[1], post[2], post[3]);                
+                        obj = new Album(post[0],post[1], post[2], post[3], null);                
                     }
                     else{
-                        obj = new Game(post[0],post[1], post[2], post[3]);                
+                        obj = new Game(post[0],post[1], post[2], post[3], null);                
                     }
                 }
                 if(obj != null){
@@ -123,7 +123,6 @@ public class RegisterMODEL{
                 line = rFile.readLine();
             }
             
-                
         System.out.println(storeObject);
         Collections.sort(storeObject);
         System.out.println(storeObject);

@@ -4,10 +4,8 @@ public abstract class MyObject implements Comparable{
     protected String author;
     protected String rating;
     protected String type;
+    protected String sortBy;
 
-    /**
-     *
-     */
     public MyObject(){
        
     }
@@ -34,10 +32,17 @@ public abstract class MyObject implements Comparable{
     public String getType(){
         return type;
     }
+    public String getSortby(){
+        return sortBy;
+    }
     @Override
     public String toString(){
-        return title + ";" + author + ";" + rating + ";" + type;
+        return title + ";" + author + ";" + rating + ";" + type + ";" + sortBy;
     } 
     @Override
     public abstract int compareTo(Object o);
+
+    String sortString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
