@@ -8,6 +8,10 @@ public class Movie extends MyObject{
         this.type = type;
         this.sortBy = sortBy;
     }
+
+    Movie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public void setTitle(String title) {
         this.title = title;

@@ -33,6 +33,7 @@ public class Game extends MyObject{
         String sortString = "Game" + this.title + this.author + this.rating;
         return sortString;
     }
+    
     @Override
     public int compareTo(Object o) {
         MyObject c = (MyObject) o;

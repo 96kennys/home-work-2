@@ -1,4 +1,18 @@
 
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +32,8 @@ public class RegisterGUI extends javax.swing.JFrame {
     public RegisterGUI() {
         initComponents();
         model = new RegisterMODEL();
+        txaTextscreen.setEditable(false);
+        rdbGame.doClick();
     }
 
     /**
@@ -34,6 +50,10 @@ public class RegisterGUI extends javax.swing.JFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         pnlRegister = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
+        btnSearch = new javax.swing.JButton();
+        txfSearch = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaSearch = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblAuthor = new javax.swing.JLabel();
@@ -62,18 +82,47 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txfSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfSearchActionPerformed(evt);
+            }
+        });
+
+        txaSearch.setColumns(20);
+        txaSearch.setRows(5);
+        jScrollPane1.setViewportView(txaSearch);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 753, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(txfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnSearch)
+                .addGap(85, 85, 85)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearch)
+                    .addComponent(txfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(382, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
 
-        pnlRegister.addTab("tab2", jPanel5);
+        pnlRegister.addTab("Search", jPanel5);
 
         lblTitle.setText("Titel:");
 
@@ -225,9 +274,10 @@ public class RegisterGUI extends javax.swing.JFrame {
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(123, 123, 123)
-                                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)
+                                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -270,11 +320,11 @@ public class RegisterGUI extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRemove))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -324,9 +374,16 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void btnAddCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCsvActionPerformed
         model.addObject(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
+        txaTextscreen.setText("");
         txfTitle.setText("");
         txfAuthor.setText("");
         txfRating.setText("");
+        for(MyObject obj : model.readObjects(sortBy)){
+            txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
+                obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
+                obj.getType() + "\n\n");
+            cbSelect.addItem(obj.getTitle());
+        }
     }//GEN-LAST:event_btnAddCsvActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
@@ -334,12 +391,13 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
     private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadFileActionPerformed
-        txaTextscreen.append("");
+        cbSelect.removeAllItems();
+        txaTextscreen.setText("");
         for(MyObject obj : model.readObjects(sortBy)){
-            cbSelect.addItem(obj.getTitle());
             txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
                 obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
                 obj.getType() + "\n\n");
+            cbSelect.addItem(obj.getTitle());
         }
     }//GEN-LAST:event_btnReadFileActionPerformed
 
@@ -348,9 +406,33 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddXmlActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        
         model.removeObject((String) cbSelect.getSelectedItem());
+        txaTextscreen.setText("");
         cbSelect.removeItem(cbSelect.getSelectedItem());
+        for(MyObject obj : model.readObjects(sortBy)){
+            txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
+                obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
+                obj.getType() + "\n\n");
+            cbSelect.addItem(obj.getTitle());
+        }
     }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+            
+        try {
+            String xml = model.searchItem(txfSearch.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(RegisterGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfSearchActionPerformed
     
     /**
      * @param args the command line arguments
@@ -393,12 +475,14 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnReadFile;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox cbSelect;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -414,9 +498,11 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbSortByAuthor;
     private javax.swing.JRadioButton rdbSortByRating;
     private javax.swing.JRadioButton rdbSortByTitel;
+    private javax.swing.JTextArea txaSearch;
     private javax.swing.JTextArea txaTextscreen;
     private javax.swing.JTextField txfAuthor;
     private javax.swing.JTextField txfRating;
+    private javax.swing.JTextField txfSearch;
     private javax.swing.JTextField txfTitle;
     // End of variables declaration//GEN-END:variables
 }

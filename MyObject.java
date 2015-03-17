@@ -43,6 +43,6 @@ public abstract class MyObject implements Comparable{
     public abstract int compareTo(Object o);
 
     String sortString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
