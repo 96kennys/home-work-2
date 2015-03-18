@@ -1,6 +1,16 @@
-
+/**
+ * @author © Kent Nystedt Björknäsgymansiet TE12
+ */
+//Adds methods and components from the abstract class "MyObject".
 public class Game extends MyObject{
-    
+    /**
+     * Creates the game witht he corresponding items.
+     * @param title the title of the game as a string.
+     * @param author the author of the game as a string.
+     * @param rating the rating of the game as a string.
+     * @param type the type of the game as a string.
+     * @param sortBy the type that the game is sorted after.
+     */
     public Game(String title, String author, String rating, String type, String sortBy){
         this.title = title;
         this.author = author;
@@ -8,32 +18,21 @@ public class Game extends MyObject{
         this.type = type;
         this.sortBy = sortBy;
     }
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    @Override
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
-    }  
-    
+    /**
+     * Creates an string with the current components of the album.
+     * @return the created string.
+     */
     @Override
     public String sortString(){
         String sortString = "Game" + this.title + this.author + this.rating;
         return sortString;
     }
-    
+    /**
+     * If an variable sortBy is equal to a string, the file is sorted in that pattern.
+     * @param o an abstract item.
+     * @return an int that is implemented in "collections.sort" to sort the
+     * list.
+     */
     @Override
     public int compareTo(Object o) {
         MyObject c = (MyObject) o;

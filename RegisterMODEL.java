@@ -1,4 +1,6 @@
-
+/**
+ * @author © Kent Nystedt Björknäsgymansiet TE12
+ */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -12,6 +14,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
@@ -21,19 +24,17 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartDocument;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import org.xml.sax.SAXException;
-
 public class RegisterMODEL{
-    
+    //The membervariables are defined.
     protected String sortType;
     protected String filePath;
     static final String TITLE = "title";
     ArrayList<MyObject> storeObject;
     ArrayList<MyObject> storeXMLObject;
-    
+    //The contstructor
     public RegisterMODEL(){
+        //The ArrayList is initialized.
         storeObject = new ArrayList<MyObject>(); 
-        storeXMLObject = new ArrayList<MyObject>();
     }
     /**
      * Creates an temporary object and makes it a movie, game, or album depending
@@ -44,6 +45,7 @@ public class RegisterMODEL{
      * @param type The type of the object added as a string.
      */
     public void addObject(String title, String author, String rating, String type){
+        
         
         storeObject.clear();
         MyObject tmp;
@@ -62,6 +64,7 @@ public class RegisterMODEL{
         System.out.println(tmp.toString());
         
         addObjectToFile();
+        
     }
     /**
      * Adds the objects from "addObject" to the file. Creates a buffered 
@@ -77,7 +80,6 @@ public class RegisterMODEL{
             String line = rFile.readLine();
             line = rFile.readLine();
             MyObject obj = null;
-            System.out.println("line: " + line);
             
             while(line != null){
                 post = line.split(";");
@@ -112,21 +114,21 @@ public class RegisterMODEL{
             writeToFile.close();
         }
         catch(IOException e){            
-            System.out.println("An issue has occured.");
+            JOptionPane.showMessageDialog(null, "You haven't selected a file!");
         }
         storeObject.clear();
     }
     /**
      * Encourages the user to select an file by showing a window with a file
-     * gallery of the local pc. the filepath is saved to be used.
+     * gallery of the local pc. The filepath is saved to be used.
      */
     public void chooseFile(){
         JFileChooser win = new JFileChooser( System.getProperty("user.dir"));
         win.showDialog(null, "Choose File");
         
         filePath = win.getSelectedFile().getName();
-        System.out.println(filePath);
-    }/**
+    }
+    /**
      * Reads the objects from the file and if sortBy is defined as rating,
      * author or title the arraylist will be sorted in that pattern when returned.
      * @param sortBy the pattern the the arraylist will be sorted as a string.
@@ -140,12 +142,10 @@ public class RegisterMODEL{
             String line = rFile.readLine();
             line = rFile.readLine();
             MyObject obj = null;
-            System.out.println("line: " + line);
             
             while(line != null){
                 post = line.split(";");
                 for(int i = 0; i < post.length; i++){
-                    System.out.println(post[3]);
                     if(post[3].equals("Movie")){
                         obj = new Movie(post[0], post[1], post[2], post[3], sortBy); 
                     }
@@ -162,17 +162,16 @@ public class RegisterMODEL{
                 line = rFile.readLine();
             }
             
-        System.out.println(storeObject);
         Collections.sort(storeObject);
-        System.out.println(storeObject);
         }catch(IOException e){
-            System.out.println("An issue has occured.");
+            JOptionPane.showMessageDialog(null, "You haven't selected a file!");
         }
         return storeObject;
     }
     /**
-     * Reads the objects from the file and saves them, unless the title of an object
-     * is the same as the "object" then it isn't saved and therefore removed.
+     * Reads the objects from the file and creates them, unless the title of an object
+     * is the same as the "object" then it isn't created and therefore removed because
+     * it isn't saved along witht the objects.
      * @param object the title of the object as a string.
      */
     public void removeObject(String object){
@@ -183,15 +182,12 @@ public class RegisterMODEL{
             String line = rFile.readLine();
             line = rFile.readLine();
             MyObject obj = null;
-            System.out.println("line: " + line);
             
             while(line != null){
                 post = line.split(";");
-                System.out.println("loop");
                 for(int i = 0; i < post.length; i++){
                     
                     if(post[0].equals(object)){
-                        System.out.println("Kolla in!");
                         obj = null;
                         break;
                     }else{
@@ -229,27 +225,29 @@ public class RegisterMODEL{
         }
         storeObject.clear();
     }
-    //The following methods are for XML use.
     /**
-     * Serached the imdb api for a title.
+     * Searches the omdb api for an item.
      * @param item the title to search for as a string.
-     * @return the XML data of the movie from imdb's api.
-     * @throws IOException
-     * @throws SAXException 
+     * @return the XML data of the movie from imdb's api as a string.
      */
-    public String searchItem(String item) throws IOException, SAXException{
-        String title = item;
-        URL oracle = new URL("http://www.omdbapi.com/?t="+title+"&y=&plot=short&r=xml");
-        URLConnection yc = oracle.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != null)
-            return inputLine;
-        in.close();
+    public String searchItem(String item){
+        String inputLine = "";
+        try{
+            URL oracle = new URL("http://www.omdbapi.com/?t="+item+"&y=&plot=short&r=xml");
+            URLConnection yc = oracle.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+            while ((inputLine = in.readLine()) != null){
+                return inputLine;
+            }
+            in.close();
+        }
+        catch(IOException e){
+            System.out.println("An error has occured.");
+        }
         return inputLine;
     }
     /**
-     * Writes an XML file.
+     * Writes an XML file by creating different tags that are fillable.
      * @param title the title of the object as a string.
      * @param author the author of the object as a string.
      * @param rating the rating of the object as a string.
@@ -274,12 +272,12 @@ public class RegisterMODEL{
 
             // create config open tag
             StartElement libStartElement = eventFactory.createStartElement("",
-            "", "reviews");
+            "", "objects");
             eventWriter.add(end);
             eventWriter.add(libStartElement);
             eventWriter.add(end);
             StartElement itemStartElement = eventFactory.createStartElement("",
-            "", "review");
+            "", "object");
 	  
             // Contact1
 			
@@ -291,10 +289,10 @@ public class RegisterMODEL{
             createNode(eventWriter, "rating", rating);
             createNode(eventWriter, "type", type);
             eventWriter.add(tab);
-            eventWriter.add(eventFactory.createEndElement("", "", "review"));
+            eventWriter.add(eventFactory.createEndElement("", "", "object"));
             eventWriter.add(end);
       
-            eventWriter.add(eventFactory.createEndElement("", "", "reviews"));
+            eventWriter.add(eventFactory.createEndElement("", "", "objects"));
             eventWriter.add(end);
             eventWriter.add(eventFactory.createEndDocument());
             eventWriter.close();
@@ -304,88 +302,32 @@ public class RegisterMODEL{
     }
     /**
      * Created an XML node that can be filled with information.
-     * @param eventWriter
-     * @param name
-     * @param value
-     * @throws XMLStreamException 
+     * @param eventWriter the top tag of the XMl document.
+     * @param name the name of the XML element as a string.
+     * @param value the value of the created character event.
      */
     private static void createNode(XMLEventWriter eventWriter, String name,
-        String value) throws XMLStreamException {
+        String value){
+        try{
+            XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+            XMLEvent end = eventFactory.createDTD("\n");
+            XMLEvent tab = eventFactory.createDTD("\t");
+            // create Start node
+            StartElement sElement = eventFactory.createStartElement("", "", name);
+            eventWriter.add(tab);
+            eventWriter.add(tab);
+            eventWriter.add(sElement);
+            // create Content
+            Characters characters = eventFactory.createCharacters(value);
+            eventWriter.add(characters);
 
-        XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-	XMLEvent end = eventFactory.createDTD("\n");
-	XMLEvent tab = eventFactory.createDTD("\t");
-	// create Start node
-	StartElement sElement = eventFactory.createStartElement("", "", name);
-	eventWriter.add(tab);
-	eventWriter.add(tab);
-	eventWriter.add(sElement);
-	// create Content
-	Characters characters = eventFactory.createCharacters(value);
-        eventWriter.add(characters);
-
-	// create End node
-	EndElement eElement = eventFactory.createEndElement("", "", name);
-	eventWriter.add(eElement);
-	eventWriter.add(end);
+            // create End node
+            EndElement eElement = eventFactory.createEndElement("", "", name);
+            eventWriter.add(eElement);
+            eventWriter.add(end);
+        }
+        catch(XMLStreamException e){
+            System.out.println("An error has occured.");
+        }
     }
-     /*
-    @SuppressWarnings({ "unchecked", "null" })
-    public static ArrayList<MyObject> readXML(String xmlFile) {
-		try{
-	    		// First, create a new XMLInputFactory
-	      	  	XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-	      	  	// Setup a new eventReader
-	      	 	InputStream in = new FileInputStream(xmlFile);
-	      	   	XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-	      	  	// read the XML document
-	      	  	MyObject contact = null;
-
-	      	  	while (eventReader.hasNext()) {
-	      		XMLEvent event = eventReader.nextEvent();
-
-	        	if (event.isStartElement()) {
-	          		StartElement startElement = event.asStartElement();
-	          	  	// If we have an item element, we create a new item
-				contact = new Movie();
-				Iterator<Attribute> attributes = startElement.getAttributes();
-	            	while (attributes.hasNext()) {
-	              		Attribute attribute = attributes.next();
-	              		if (attribute.getName().toString().equals(TITLE)) {
-	                		contact.setTitle((attribute.getValue()) );
-                                        storeXMLObject.add(contact);
-	              		}
-                        }
-                                
-	          	/*  	if (event.isStartElement()) {
-	            			if ( event.asStartElement().getName().getLocalPart().equals(ADRESS) ) {
-	              			event = eventReader.nextEvent();
-	              			contact.setAdress(event.asCharacters().getData());
-	              		  	continue;
-	            			}
-	          		}
-				
-	          	  	if ( event.asStartElement().getName().getLocalPart().equals(PHONE) ) {
-	            			event = eventReader.nextEvent();
-	            			contact.setPhone(event.asCharacters().getData());
-	            			continue;
-	        		}
-	        	}
-	        	// If we reach the end of an item element, we add it to the list
-	        	if (event.isEndElement()) {
-	          		EndElement endElement = event.asEndElement();
-	          	  	if (endElement.getName().getLocalPart() == (CONTACT)) {
-	            			
-	          		}
-	        	}
-                        
-
-	      	}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-	  	} catch (XMLStreamException e) {
-	    		e.printStackTrace();
-	    	}
-	    	return storeXMLObject;
-	}*/
 }

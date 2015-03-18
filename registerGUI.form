@@ -60,27 +60,39 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="70" max="32767" attributes="0"/>
-                      <Component id="txfSearch" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="413" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="209" max="32767" attributes="0"/>
+                      <Component id="lblImdb" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="328" max="-2" attributes="0"/>
+                              <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
+                              <Component id="txfSearch" min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="382" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="lblImdb" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txfSearch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="377" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -94,9 +106,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txfSearch">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfSearchActionPerformed"/>
-              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
@@ -113,6 +122,11 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="lblImdb">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search an title from imdb&apos;s api. Only reads single names, like &quot;Batman&quot;."/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -157,11 +171,11 @@
                                                   <Component id="lblAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lblRating" alignment="1" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="txfTitle" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                                  <Component id="txfAuthor" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                                  <Component id="txfRating" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txfAuthor" min="-2" pref="67" max="-2" attributes="0"/>
+                                                  <Component id="txfRating" min="-2" pref="67" max="-2" attributes="0"/>
+                                                  <Component id="txfTitle" min="-2" pref="67" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -183,17 +197,16 @@
                                                   <Component id="rdbAlbum" min="-2" max="-2" attributes="0"/>
                                                   <Component id="rdbGame" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Component id="jSeparator1" max="32767" attributes="0"/>
                                   <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="cbSelect" min="-2" pref="97" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                                      <Component id="btnRemove" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="cbSelect" min="-2" pref="130" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="btnRemove" min="-2" pref="130" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -249,8 +262,8 @@
                       <Component id="lblDelete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbSelect" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbSelect" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="165" max="32767" attributes="0"/>
                   </Group>
@@ -261,7 +274,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblTitle">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Titel:"/>
+                <Property name="text" type="java.lang.String" value="Title:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAuthor">
@@ -271,7 +284,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblRating">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rating:"/>
+                <Property name="text" type="java.lang.String" value="Rating(1-9):"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -354,7 +367,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblSortBy">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sort by:"/>
+                <Property name="text" type="java.lang.String" value="Sort by:                    default sorting: type&gt;title&gt;author&gt;rating"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdbSortByTitel">

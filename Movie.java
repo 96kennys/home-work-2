@@ -1,6 +1,17 @@
-
+/**
+ * @author © Kent Nystedt Björknäsgymansiet TE12
+ */
+//Adds methods and components from the abstract class "MyObject".
 public class Movie extends MyObject{
     
+    /**
+     * Creates the movie witht he corresponding items.
+     * @param title the title of the game as a string.
+     * @param author the author of the game as a string.
+     * @param rating the rating of the game as a string.
+     * @param type the type of the game as a string.
+     * @param sortBy the type that the movie is sorted after.
+     */
     public Movie(String title, String author, String rating, String type, String sortBy){
         this.title = title;
         this.author = author;
@@ -8,29 +19,7 @@ public class Movie extends MyObject{
         this.type = type;
         this.sortBy = sortBy;
     }
-
-    Movie() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    @Override
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
-    } 
+    
     @Override
     public String sortString(){
         String sortString = "Movie" + this.title + this.author + this.rating;
