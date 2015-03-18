@@ -25,10 +25,9 @@ import javax.xml.stream.events.StartDocument;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 public class RegisterMODEL{
-    //The membervariables are defined.
+    //The references to the membervariables are defined.
     protected String sortType;
     protected String filePath;
-    static final String TITLE = "title";
     ArrayList<MyObject> storeObject;
     ArrayList<MyObject> storeXMLObject;
     //The contstructor

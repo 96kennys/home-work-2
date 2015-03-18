@@ -3,7 +3,7 @@
  */
 //Implements the interface comparable.
 public abstract class MyObject implements Comparable{
-    //The membervariables are defined.
+    ////The references to the membervariables are defined.
     protected String title;
     protected String author;
     protected String rating;
