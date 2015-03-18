@@ -61,7 +61,6 @@ public class RegisterMODEL{
         }
         
         storeObject.add(tmp);
-        System.out.println(tmp.toString());
         
         addObjectToFile();
         
@@ -83,7 +82,6 @@ public class RegisterMODEL{
             
             while(line != null){
                 post = line.split(";");
-                System.out.println("loop");
                 for(int i = 0; i < post.length; i++){
                     if(post[3].equals("Movie")){
                         obj = new Movie(post[0], post[1], post[2], post[3], "o");
