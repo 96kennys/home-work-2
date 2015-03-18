@@ -3,14 +3,14 @@
  */
 import javax.swing.JOptionPane;
 
-public class registerGUI extends javax.swing.JFrame {
-    //Member variables and the reference of the model class are defined
+public class RegisterGUI extends javax.swing.JFrame {
+    //Member variables and the reference of the modelclass are defined.
     private String type;
     private String sortBy;
     private RegisterMODEL model;
     
-    public registerGUI() {
-        /*Initializes member variables, the reference of the model class and 
+    public RegisterGUI() {
+        /*Initializes membervariables, the reference of the model class and 
         the graphical user components. As well sets the attribute of some components.
         */
         initComponents();
@@ -338,7 +338,7 @@ public class registerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//Sets the private variable sortBy to the following strings:
+//Sets the private variable sortBy to either of the following strings:
     private void rdbSortByRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSortByRatingActionPerformed
         sortBy = "rating";
     }//GEN-LAST:event_rdbSortByRatingActionPerformed
@@ -350,7 +350,7 @@ public class registerGUI extends javax.swing.JFrame {
     private void rdbSortByTitelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSortByTitelActionPerformed
         sortBy = "title";
     }//GEN-LAST:event_rdbSortByTitelActionPerformed
-//Sets the private variable type to the following strings:
+//Sets the private variable type to either of the following strings:
     private void rdbMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMovieActionPerformed
         type = "Movie";
     }//GEN-LAST:event_rdbMovieActionPerformed
@@ -421,7 +421,7 @@ public class registerGUI extends javax.swing.JFrame {
 
     private void btnAddXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddXmlActionPerformed
         /*If the filepath isn't selected it's null and the XML object wont be added.
-        If the filepath is defined i add the XML object.
+        If the filepath is defined I add the XML object.
         */
         if(model.filePath == null){
             JOptionPane.showMessageDialog(null, "You haven't selected a file!");
@@ -500,20 +500,21 @@ public class registerGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registerGUI().setVisible(true);
+                new RegisterGUI().setVisible(true);
             }
         });
     }

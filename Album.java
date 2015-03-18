@@ -9,7 +9,7 @@ public class Album extends MyObject{
      * @param author the author of the album as an string.
      * @param rating the rating of the album as an string.
      * @param type the type of the album as an string.
-     * @param sortBy the type that the album is sorted after.
+     * @param sortBy the type(sortBy) that the album is sorted after.
      */
     public Album(String title, String author, String rating, String type, String sortBy){
         this.title = title;
@@ -19,7 +19,7 @@ public class Album extends MyObject{
         this.sortBy = sortBy;
     }
     /**
-     * Creates an string with the current components of the album.
+     * Creates an string with the current components of the album in a specific order.
      * @return the created string.
      */
     @Override
@@ -29,7 +29,7 @@ public class Album extends MyObject{
     }
     /**
      * If an variable sortBy is equal to a string, the file is sorted in that pattern.
-     * @param o an abstract item.
+     * @param o an abstract item that is comapared to in order to sort.
      * @return an int that is implemented in "collections.sort" to sort the
      * list.
      */

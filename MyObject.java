@@ -3,7 +3,7 @@
  */
 //Implements the interface comparable.
 public abstract class MyObject implements Comparable{
-    //The membervariables are defined;
+    //The membervariables are defined.
     protected String title;
     protected String author;
     protected String rating;
@@ -49,7 +49,7 @@ public abstract class MyObject implements Comparable{
         return sortBy;
     }
     /**
-     * Creates a string that that has the variabler of the object seperated by a
+     * Creates a string that that has the variables of the object seperated by a
      * semicolon.
      * @return a string with the variables seperated by a semicolon.
      */
@@ -65,9 +65,8 @@ public abstract class MyObject implements Comparable{
     @Override
     public abstract int compareTo(Object o);
     /**
-     * A method that is extended and modyfied in the subclasses.
+     * A method that is extended and modified in the subclasses.
      * @return nothing.
-     * 
      */
     String sortString() {
         return null;

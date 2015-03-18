@@ -10,7 +10,7 @@ public class Movie extends MyObject{
      * @param author the author of the game as a string.
      * @param rating the rating of the game as a string.
      * @param type the type of the game as a string.
-     * @param sortBy the type that the movie is sorted after.
+     * @param sortBy the type(sortBy) that the movie is sorted after.
      */
     public Movie(String title, String author, String rating, String type, String sortBy){
         this.title = title;
@@ -20,11 +20,21 @@ public class Movie extends MyObject{
         this.sortBy = sortBy;
     }
     
+    /**
+     * Creates an string with the current components of the movie in a specific order.
+     * @return the created string.
+     */
     @Override
     public String sortString(){
         String sortString = "Movie" + this.title + this.author + this.rating;
         return sortString;
     }
+    /**
+     * If an variable sortBy is equal to a string, the file is sorted in that pattern.
+     * @param o an abstract item that is comapared to in order to sort.
+     * @return an int that is implemented in "collections.sort" to sort the
+     * list.
+     */
     @Override
     public int compareTo(Object o) {
         MyObject c = (MyObject) o;
