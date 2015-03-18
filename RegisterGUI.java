@@ -364,7 +364,9 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_rdbGameActionPerformed
 
     private void btnAddCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCsvActionPerformed
-        /*If the filepath isn't selected it's null and then adding an object wont work
+        /*Observe: Couldn't output the dialog window in try,catch-method in the model class
+        so this is how I resolved the issue.
+        If the filepath isn't selected it's null and then adding an object wont work
         the user gets a message encouraging them to choose a file.
         If the filepath is defined i add the object to that file and refresh the textarea.
         */
