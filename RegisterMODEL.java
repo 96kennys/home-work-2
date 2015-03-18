@@ -37,7 +37,8 @@ public class RegisterMODEL{
     }
     /**
      * Creates an temporary object and makes it a movie, game, or album depending
-     * on the type. Then it's added to an arraylist and runs the method "addObjectToFile".
+     * on the type. Then it's added to an arraylist and the method calls the 
+     * method "addObjectToFile".
      * @param title The title of the object added as a string.
      * @param author The author of the object added as a string.
      * @param rating The rating of the object added as a string.
@@ -68,8 +69,9 @@ public class RegisterMODEL{
      * Adds the objects from "addObject" to the file. Creates a buffered 
      * reader with a filereader as the path of the file. The methods loops the
      * file aslong as there isn't a new line of text to read and creates and instance
-     * of the subclasses depending on the class and ads it to the arraylist with the
-     * object from "addObject". Then the arraylist is looped and written to the file.
+     * of the subclass depending on the class and the text at post[3] and ads 
+     * it to the arraylist with the object from "addObject". 
+     * Then the arraylist is sorted then looped and written to the file.
      */
     protected void addObjectToFile(){
         try{
@@ -111,13 +113,14 @@ public class RegisterMODEL{
             writeToFile.close();
         }
         catch(IOException e){            
-            JOptionPane.showMessageDialog(null, "You haven't selected a file!");
+            System.out.println("An error has occured.");
         }
+        //Clears the arraylist.
         storeObject.clear();
     }
     /**
      * Encourages the user to select an file by showing a window with a file
-     * gallery of the local pc. The filepath is saved to be used.
+     * gallery of the pc. The filepath is saved to be used.
      */
     public void chooseFile(){
         JFileChooser win = new JFileChooser( System.getProperty("user.dir"));
@@ -183,7 +186,6 @@ public class RegisterMODEL{
             while(line != null){
                 post = line.split(";");
                 for(int i = 0; i < post.length; i++){
-                    
                     if(post[0].equals(object)){
                         obj = null;
                         break;

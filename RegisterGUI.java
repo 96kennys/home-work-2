@@ -376,6 +376,8 @@ public class RegisterGUI extends javax.swing.JFrame {
         else{
             //Adds an object to an ArrayList and adds it to the file.
             model.addObject(txfTitle.getText(), txfAuthor.getText(), txfRating.getText(), type);
+            //Cleanses the combo box.
+            cbSelect.removeAllItems();
             txaTextscreen.setText("");
             txfTitle.setText("");
             txfAuthor.setText("");
@@ -387,13 +389,14 @@ public class RegisterGUI extends javax.swing.JFrame {
                 txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
                     obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
                     obj.getType() + "\n\n");
+                //Adds the items to the combobox.
                 cbSelect.addItem(obj.getTitle());
             }
         }
     }//GEN-LAST:event_btnAddCsvActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
-        //Runs the method "chooseFile".
+        //Displays an window that the user can choose a file from.
         model.chooseFile();
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
@@ -406,7 +409,7 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You haven't selected a file!");
         }
         else{
-            //Refreshes the combo box by removing the items and then adding the new ones.
+            //Removes the items in the combobox.
             cbSelect.removeAllItems();
             txaTextscreen.setText("");
             /*Loops the array obj with the objects retrieved from the method "readObjects".
@@ -416,6 +419,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                 txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
                     obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
                     obj.getType() + "\n\n");
+                //Adds the new items in the combo box.
                 cbSelect.addItem(obj.getTitle());
             }
         }
@@ -439,7 +443,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         /*If the filepath isn't selected it's null and the user can't remove an item.
-        If the filepath is defined i remove the item and then refreshes the textarea
+        If the filepath is defined I remove the item and then refresh the textarea
         and combo box.
         */
         if(model.filePath == null){
@@ -448,6 +452,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         else{
             model.removeObject((String) cbSelect.getSelectedItem());
             txaTextscreen.setText("");
+            //Removes the items in the combo box.
             cbSelect.removeAllItems();
             /*Loops the array obj with the objects retrieved from the method "readObjects".
             and outputs them in the textarea and combo box.
@@ -456,6 +461,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                 txaTextscreen.append("Title: " + obj.getTitle() + "\n" + "Author: " +
                     obj.getAuthor() + "\n" + "Rating: " + obj.getRating() + "\nType: " +
                     obj.getType() + "\n\n");
+                //Adds the new items in the combo box.
                 cbSelect.addItem(obj.getTitle());
             }
         }
@@ -475,7 +481,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         int indexStart3 = xml.indexOf("plot");
         int indexEnd3 = xml.indexOf("poster");
         
-        //The CharSequence inbetween the indexes.
+        //The CharSequence(the text) inbetween the indexes.
         CharSequence subSequence = xml.subSequence(indexStart, indexEnd);
         CharSequence subSequence1 = xml.subSequence(indexStart2, indexEnd2);
         CharSequence subSequence2 = xml.subSequence(indexStart3, indexEnd3);
