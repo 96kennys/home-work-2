@@ -52,7 +52,7 @@ public class Movie extends MyObject{
             return this.rating.compareTo(c.getRating());
         }
         else{
-           return this.title.compareTo(c.getAuthor());
+           return this.title.compareTo(c.getTitle());
         }
     }
 }
